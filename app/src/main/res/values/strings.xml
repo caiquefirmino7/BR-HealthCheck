@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">BR HealthCheck</string>
+
+    <string name="pacientes">Pacientes</string>
+
+    <string name="name">Nome</string>
+    <string name="age">Idade</string>
+    <string name="bodyTemp">Temperatura corporal (°C)</string>
+    <string name="coughDays">Periodo com tosse (dias)</string>
+    <string name="headacheDays">Periodo com Dor de Cabeça(dias)</string>
+    <string name="visited_countries">Você visitou algum desses paises nas ultimas 6 semanas?</string>
+    <string name="patient_register">Registrar Paciente</string>
+    <string name="toolbar_register">Registro</string>
+
+
+    <string name="menu_all">Listar todos</string>
+    <string name="menu_interned">Internados\n</string>
+    <string name="menu_quarantined">Quarentena</string>
+    <string name="menu_released">Liberados</string>
+
+
+    <string name="not_visited">Não visitei</string>
+    <string name="eua">EUA</string>
+    <string name="portugal">Portugal</string>
+    <string name="indonesia">Indonésia</string>
+    <string name="china">China</string>
+    <string name="italia">Itália</string>
+
+    <string name="fab_description">Adicionar novo paciente</string>
+
+
+</resources>

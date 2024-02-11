@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterPatient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/patient_register"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25sp">
+        </TextView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:background="@android:color/transparent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:background="@android:color/transparent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/age"
+                android:inputType="number"
+                android:maxLength="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="-10dp"
+            android:background="@android:color/transparent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bodyTemp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bodyTemp"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="-10dp"
+            android:background="@android:color/transparent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/coughDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/coughDays"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:background="@android:color/transparent"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/headacheDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/headacheDays"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewVisitedCountries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="25dp"
+            android:text="@string/visited_countries"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/checkBoxItaly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/italia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxIndonesia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/indonesia"
+                app:layout_constraintEnd_toStartOf="@+id/checkBoxPortugal"
+                app:layout_constraintStart_toEndOf="@id/checkBoxItaly"
+                app:layout_constraintTop_toTopOf="@id/checkBoxItaly" />
+
+            <CheckBox
+                android:id="@+id/checkBoxPortugal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/portugal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/checkBoxIndonesia"
+                android:layout_marginEnd="33dp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxUSA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eua"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkBoxItaly"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxChina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/china"
+                app:layout_constraintEnd_toStartOf="@+id/checkboxNot"
+                app:layout_constraintStart_toEndOf="@id/checkBoxUSA"
+                app:layout_constraintTop_toTopOf="@id/checkBoxUSA" />
+
+            <CheckBox
+                android:id="@+id/checkboxNot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/not_visited"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/checkBoxChina"
+                android:layout_marginEnd="20dp" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/icon_check"
+                android:backgroundTint="@color/blue"
+                android:contentDescription="@string/fab_description"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxChina"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
