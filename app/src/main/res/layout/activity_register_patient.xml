@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".RegisterPatient">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            app:navigationIcon="@drawable/icon_back"
+            app:title="@string/toolbar_register"
+            app:titleTextColor="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +46,7 @@
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name"
+                android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
@@ -56,7 +66,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/age"
+                android:id="@+id/editAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/age"
@@ -75,7 +85,7 @@
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bodyTemp"
+                android:id="@+id/editBodyTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bodyTemp"
@@ -93,7 +103,7 @@
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/coughDay"
+                android:id="@+id/editCoughDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/coughDays"
@@ -110,7 +120,7 @@
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/headacheDays"
+                android:id="@+id/editheadacheDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/headacheDays"
@@ -119,7 +129,7 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewVisitedCountries"
+            android:id="@+id/textVisitedCountries"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -193,6 +203,7 @@
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
