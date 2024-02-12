@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caique.brhealthcheck.dao.PatientDao;
@@ -50,6 +52,13 @@ public class RegisterPatient extends AppCompatActivity {
                 String coughDays = binding.editCoughDay.getText().toString();
                 String headacheDays = binding.editheadacheDays.getText().toString();
 
+                Boolean checkItaly = binding.checkBoxItaly.isChecked();
+                Boolean checkIndonesia = binding.checkBoxIndonesia.isChecked();
+                Boolean checkPortugal = binding.checkBoxPortugal.isChecked();
+                Boolean checkUsa = binding.checkBoxUSA.isChecked();
+                Boolean checkChina = binding.checkBoxChina.isChecked();
+                Boolean checkAnyone = binding.checkboxNot.isChecked();
+
                 if (name.trim().isEmpty()) {
                     binding.editName.setError("Informe o nome!");
                     return;
@@ -75,40 +84,94 @@ public class RegisterPatient extends AppCompatActivity {
                     return;
                 }
 
+                if (!checkItaly && !checkIndonesia && !checkPortugal && !checkUsa && !checkChina && !checkAnyone) {
+                    Toast.makeText(getApplicationContext(), "Selecione pelo menos um CheckBox!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                finish();
                 register(name, age, bodyTemp, coughDays, headacheDays);
 
-                Toast.makeText(getApplicationContext(), "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
-                finish();
 
-            }
-
-            private void register(String name, String age, String bodyTemp, String coughDays, String headacheDays){
-                executor.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            // Criar uma nova instância de Patient com os dados fornecidos
-                            Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays);
-
-                            // Obter a instância do PatientDatabase
-                            PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
-
-                            // Obter o DAO do PatientDatabase
-                            PatientDao patientDao = patientDatabase.patientDao();
-
-                            // Inserir o paciente no banco de dados usando o DAO
-                            patientDao.insertPatient(newPatient);
-
-                            // Encerrar o ExecutorService após a conclusão das operações
-                            executor.shutdown();
-                        } catch (Exception e) {
-                            // Tratar exceções, se ocorrerem durante a inserção do paciente
-                            e.printStackTrace();
-                        }
-                    }
-                });
             }
         });
 
+        binding.checkboxNot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                binding.checkBoxItaly.setEnabled(!isChecked);
+                binding.checkBoxIndonesia.setEnabled(!isChecked);
+                binding.checkBoxPortugal.setEnabled(!isChecked);
+                binding.checkBoxUSA.setEnabled(!isChecked);
+                binding.checkBoxChina.setEnabled(!isChecked);
+
+                if (isChecked) {
+                    binding.checkBoxItaly.setChecked(false);
+                    binding.checkBoxIndonesia.setChecked(false);
+                    binding.checkBoxPortugal.setChecked(false);
+                    binding.checkBoxUSA.setChecked(false);
+                    binding.checkBoxChina.setChecked(false);
+                }
+            }
+        });
     }
+
+    private void register(String name, String age, String bodyTemp, String coughDays, String headacheDays) {
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Inicializar o PatientDao
+                    PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
+                    patientDao = patientDatabase.patientDao();
+
+
+
+                    // Verificar se o paciente já existe no banco de dados
+                    Patient existingPatient = patientDao.getPatientByName(name);
+
+                    if (existingPatient != null) {
+                        // Se o paciente já existe, exibir uma mensagem e retornar
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterPatient.this, "Paciente já existente!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        return;
+                    }
+
+                    // Criar uma nova instância de Patient com os dados fornecidos
+                    Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays);
+
+
+                    // Inserir o paciente no banco de dados usando o DAO
+                    patientDao.insertPatient(newPatient);
+
+
+                    // Exibir a mensagem de sucesso apenas se o paciente não existir
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RegisterPatient.this, "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    // Encerrar o ExecutorService após a conclusão das operações
+                    if (executor != null) {
+                        executor.shutdown();
+                    }
+                }
+            }
+        });
+
+
+    }
+
+
+
 }

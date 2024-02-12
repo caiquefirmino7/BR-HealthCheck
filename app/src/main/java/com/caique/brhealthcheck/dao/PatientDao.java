@@ -24,7 +24,12 @@ public interface PatientDao {
    @Query("SELECT * FROM patients")
    List<Patient> getAllPatients();
 
-
-
+   @Query("SELECT * FROM patients WHERE name = :name LIMIT 1")
+   Patient getPatientByName(String name);
 
 }
+
+
+
+
+
