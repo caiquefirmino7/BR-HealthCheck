@@ -17,12 +17,8 @@ public interface PatientDao {
    void insertPatient(Patient patient);
 
 
-   @Update
-   void updatePatient(Patient patient);
-
-
-   @Delete
-   void deletePatient(Patient patient);
+   @Query("DELETE FROM patients WHERE uid = :id")
+   void deletePatient(int id);
 
 
    @Query("SELECT * FROM patients")

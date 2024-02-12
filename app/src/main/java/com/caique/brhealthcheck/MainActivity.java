@@ -3,6 +3,7 @@ package com.caique.brhealthcheck;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent navigateRegisterScreen = new Intent(MainActivity.this, RegisterPatient.class);
                 startActivity(navigateRegisterScreen);
+
+                getPatients(); // Carrega a lista de pacientes ao criar a atividade
+                setupRecyclerView(); // Configura o RecyclerView
             }
         });
 
@@ -44,16 +48,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getPatients();
+        getPatients(); // Atualiza a lista de pacientes ao retomar a atividade
     }
 
+    // Método para obter a lista de pacientes do banco de dados
     private void getPatients() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 patientDao = PatientDatabase.getInstance(MainActivity.this).patientDao();
                 List<Patient> patients = patientDao.getAllPatients();
-                patientsList.postValue(patients);
+                patientsList.postValue(patients); // Notifica os observadores sobre a mudança na lista de pacientes
+            }
+        }).start();
+    }
+
+    private void insertPatient(Patient patient) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                patientDao.insertPatient(patient); // Insere o paciente no banco de dados
+                getPatients(); // Atualiza a lista de pacientes e notifica os observadores
+
             }
         }).start();
     }
@@ -64,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Patient> patients) {
                 binding.rvMain.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 binding.rvMain.setHasFixedSize(true);
-                patientAdapter = new PatientAdapter(patients);
+                patientAdapter = new PatientAdapter(MainActivity.this, patients);
                 binding.rvMain.setAdapter(patientAdapter);
                 patientAdapter.notifyDataSetChanged();
             }
