@@ -28,10 +28,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMain"
+        tools:listitem="@layout/patient_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar1"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        >
 
     </androidx.recyclerview.widget.RecyclerView>
 
