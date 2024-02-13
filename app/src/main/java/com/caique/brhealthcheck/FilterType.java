@@ -1,10 +1,10 @@
 package com.caique.brhealthcheck;
 
 public enum FilterType {
-    TODOS,
-    INTERNADOS,
-    QUARENTENA,
-    LIBERADOS,
+    ALL,
+    ADMITTED,
+    QUARANTINE,
+    RELEASED,
 
 
 }

@@ -27,6 +27,7 @@
     <string name="italia">Itália</string>
 
     <string name="fab_description">Adicionar novo paciente</string>
+    <string name="splashscreen">splashScreen</string>
 
 
 </resources>

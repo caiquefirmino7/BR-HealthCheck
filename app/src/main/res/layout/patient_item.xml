@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Nome do Paciente"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="21sp"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_marginTop="5dp"
             android:text="Idade: 19"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewBodyTemperature"
@@ -42,7 +42,7 @@
             android:layout_marginTop="5dp"
             android:text="Temperatura Corporal:  35.7"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewHeadacheDays"
@@ -51,7 +51,7 @@
             android:layout_marginTop="5dp"
             android:text="Períodos com dor de cabeça : 0"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewCoughDays"
@@ -60,7 +60,7 @@
             android:layout_marginTop="5dp"
             android:text="Períodos com tosse : 0"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewStatus"
@@ -68,8 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Status: "
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="16sp" />
 
 
 

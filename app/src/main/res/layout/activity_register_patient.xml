@@ -89,7 +89,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bodyTemp"
-                android:inputType="number" />
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:digits="0123456789."/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -107,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/coughDays"
+                android:maxLength="5"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/headacheDays"
+                android:maxLength="5"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 

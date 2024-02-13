@@ -63,40 +63,20 @@ public class Patient {
         return age;
     }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
-
     public String getBodyTemperature() {
         return bodyTemperature;
-    }
-
-    public void setBodyTemperature(String bodyTemperature) {
-        this.bodyTemperature = bodyTemperature;
     }
 
     public String getCoughPeriodDays() {
         return coughPeriodDays;
     }
 
-    public void setCoughPeriodDays(String coughPeriodDays) {
-        this.coughPeriodDays = coughPeriodDays;
-    }
-
     public String getHeadachePeriodDays() {
         return headachePeriodDays;
     }
 
-    public void setHeadachePeriodDays(String headachePeriodDays) {
-        this.headachePeriodDays = headachePeriodDays;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
 
