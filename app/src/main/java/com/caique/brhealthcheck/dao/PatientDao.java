@@ -1,11 +1,13 @@
 package com.caique.brhealthcheck.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.caique.brhealthcheck.FilterType;
 import com.caique.brhealthcheck.model.Patient;
 
 import java.util.List;
@@ -26,6 +28,19 @@ public interface PatientDao {
 
    @Query("SELECT * FROM patients WHERE name = :name LIMIT 1")
    Patient getPatientByName(String name);
+
+   @Query("SELECT * FROM patients WHERE status = :filtro")
+   List<Patient>getPatientsByFilter(FilterType filtro);
+
+   @Query("SELECT * FROM patients WHERE status = 'Internado'")
+   List<Patient> getInternedPatients();
+
+   @Query("SELECT * FROM patients WHERE status = 'Quarentena'")
+   List<Patient> getQuarantinedPatients();
+
+   @Query("SELECT * FROM patients WHERE status = 'Liberado'")
+   List<Patient> getReleasedPatients();
+
 
 }
 

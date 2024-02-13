@@ -42,8 +42,4 @@ public  abstract class PatientDatabase extends RoomDatabase {
         return instance;
     }
 
-
-
-
-
 }

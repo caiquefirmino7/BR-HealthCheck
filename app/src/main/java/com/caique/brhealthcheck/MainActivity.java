@@ -2,6 +2,9 @@ package com.caique.brhealthcheck;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,43 +39,91 @@ public class MainActivity extends AppCompatActivity {
                 Intent navigateRegisterScreen = new Intent(MainActivity.this, RegisterPatient.class);
                 startActivity(navigateRegisterScreen);
 
-                getPatients(); // Carrega a lista de pacientes ao criar a atividade
+                getPatients(FilterType.TODOS);// Carrega a lista de pacientes ao criar a atividade
                 setupRecyclerView(); // Configura o RecyclerView
             }
         });
 
-        getPatients();
+        getPatients(FilterType.TODOS);
         setupRecyclerView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getPatients(); // Atualiza a lista de pacientes ao retomar a atividade
+        getPatients(FilterType.TODOS); // Atualiza a lista de pacientes ao retomar a atividade
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.filter_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_menu_all) {
+            getPatients(FilterType.TODOS);
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_interned) {
+            getPatients(FilterType.INTERNADOS);
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_quarantined) {
+            getPatients(FilterType.QUARENTENA);
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_released) {
+            getPatients(FilterType.LIBERADOS);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
     // Método para obter a lista de pacientes do banco de dados
-    private void getPatients() {
+    private void getPatients(FilterType filterType) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 patientDao = PatientDatabase.getInstance(MainActivity.this).patientDao();
-                List<Patient> patients = patientDao.getAllPatients();
+                List<Patient> patients;
+
+                switch (filterType) {
+                    case TODOS:
+                        patients = patientDao.getAllPatients();
+                        break;
+                    case INTERNADOS:
+                        patients = patientDao.getInternedPatients();
+                        break;
+                    case QUARENTENA:
+                        patients = patientDao.getQuarantinedPatients();
+                        break;
+                    case LIBERADOS:
+                        patients = patientDao.getReleasedPatients();
+                        break;
+                    default:
+                        patients = patientDao.getAllPatients();
+                        break;
+                }
+
                 patientsList.postValue(patients); // Notifica os observadores sobre a mudança na lista de pacientes
             }
         }).start();
     }
+
 
     private void insertPatient(Patient patient) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 patientDao.insertPatient(patient); // Insere o paciente no banco de dados
-                getPatients(); // Atualiza a lista de pacientes e notifica os observadores
-
+                getPatients(FilterType.TODOS); // Atualiza a lista de pacientes e notifica os observadores
             }
         }).start();
     }
+
 
     private void setupRecyclerView() {
         patientsList.observe(this, new androidx.lifecycle.Observer<List<Patient>>() {

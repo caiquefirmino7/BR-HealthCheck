@@ -3,16 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_all"
+            android:id="@+id/action_menu_all"
             android:title="@string/menu_all" />
         <item
-            android:id="@+id/menu_interned"
+            android:id="@+id/action_menu_interned"
             android:title="@string/menu_interned" />
         <item
-            android:id="@+id/menu_quarantined"
+            android:id="@+id/action_menu_quarantined"
             android:title="@string/menu_quarantined" />
+
         <item
-            android:id="@+id/menu_released"
+            android:id="@+id/action_menu_released"
             android:title="@string/menu_released" />
+
     </group>
+
+
 </menu>
