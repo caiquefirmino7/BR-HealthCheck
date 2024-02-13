@@ -8,7 +8,7 @@
     <string name="bodyTemp">Temperatura corporal (°C)</string>
     <string name="coughDays">Periodo com tosse (dias)</string>
     <string name="headacheDays">Periodo com Dor de Cabeça(dias)</string>
-    <string name="visited_countries">Você visitou algum desses paises nas ultimas 6 semanas?</string>
+    <string name="visited_countries">Você visitou algum desses paises?</string>
     <string name="patient_register">Registrar Paciente</string>
     <string name="toolbar_register">Registro</string>
 
@@ -28,6 +28,10 @@
 
     <string name="fab_description">Adicionar novo paciente</string>
     <string name="splashscreen">splashScreen</string>
+    <string name="deletar_paciente">deletar_paciente</string>
+    <string name="deletar_paaciente">deletar_paaciente</string>
+    <string name="weeks">semanas</string>
+    <string name="questions_week">"Se sim, quantas semanas? "</string>
 
 
 </resources>

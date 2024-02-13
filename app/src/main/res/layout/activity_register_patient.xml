@@ -25,13 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/patient_register"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="25sp">
-        </TextView>
+            android:textSize="25sp"
+            android:textStyle="bold"></TextView>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,8 +48,15 @@
                 android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXY
+                abcdefghijklmnopqrstuvwxyzZáàâãé
+                èêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ"
                 android:hint="@string/name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:maxLines="1"
+
+                />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -88,10 +94,10 @@
                 android:id="@+id/editBodyTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="0123456789."
                 android:hint="@string/bodyTemp"
                 android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:digits="0123456789."/>
+                android:maxLength="4" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -109,8 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/coughDays"
-                android:maxLength="5"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -127,8 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/headacheDays"
-                android:maxLength="5"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -137,7 +143,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="25dp"
             android:text="@string/visited_countries"
             android:textAlignment="center"
@@ -151,11 +156,10 @@
                 android:id="@+id/checkBoxItaly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:text="@string/italia"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
                 android:id="@+id/checkBoxIndonesia"
@@ -171,20 +175,19 @@
                 android:id="@+id/checkBoxPortugal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
                 android:text="@string/portugal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/checkBoxIndonesia"
-                android:layout_marginEnd="33dp" />
+                app:layout_constraintTop_toTopOf="@id/checkBoxIndonesia" />
 
             <CheckBox
                 android:id="@+id/checkBoxUSA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:text="@string/eua"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/checkBoxItaly"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp" />
+                app:layout_constraintTop_toBottomOf="@id/checkBoxItaly" />
 
             <CheckBox
                 android:id="@+id/checkBoxChina"
@@ -200,18 +203,40 @@
                 android:id="@+id/checkboxNot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:text="@string/not_visited"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/checkBoxChina"
-                android:layout_marginEnd="20dp" />
+                app:layout_constraintTop_toTopOf="@id/checkBoxChina" />
 
             <TextView
-                android:id="@+id/editStatus"
+                android:id="@+id/textQuestionWeeks"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="">
-
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/questions_week"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxChina">
             </TextView>
+
+
+            <EditText
+                android:id="@+id/editWeeks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/weeks"
+                android:inputType="number"
+                android:maxLength="3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.034"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textQuestionWeeks">
+
+            </EditText>
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -219,14 +244,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/icon_check"
                 android:backgroundTint="@color/blue"
                 android:contentDescription="@string/fab_description"
-                app:layout_constraintTop_toBottomOf="@+id/checkBoxChina"
+                android:src="@drawable/icon_check"
+                app:layoutDescription="@string/fab_description"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/editWeeks" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
 

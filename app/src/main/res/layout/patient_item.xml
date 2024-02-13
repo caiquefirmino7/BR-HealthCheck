@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +25,8 @@
             android:text="Nome do Paciente"
             android:textColor="@color/black"
             android:textSize="21sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/textViewAge"
@@ -33,7 +35,8 @@
             android:layout_marginTop="5dp"
             android:text="Idade: 19"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/textViewBodyTemperature"
@@ -42,7 +45,8 @@
             android:layout_marginTop="5dp"
             android:text="Temperatura Corporal:  35.7"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/textViewHeadacheDays"
@@ -51,7 +55,8 @@
             android:layout_marginTop="5dp"
             android:text="Períodos com dor de cabeça : 0"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/textViewCoughDays"
@@ -60,7 +65,8 @@
             android:layout_marginTop="5dp"
             android:text="Períodos com tosse : 0"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/textViewStatus"
@@ -70,7 +76,8 @@
             android:text="Status: "
             android:textColor="@color/red"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
 
 
 
@@ -85,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_delete"
+                android:contentDescription="@string/deletar_paaciente"
                 android:layout_marginEnd="170dp">
             </ImageView>
 

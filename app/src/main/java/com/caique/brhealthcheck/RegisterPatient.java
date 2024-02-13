@@ -46,6 +46,7 @@ public class RegisterPatient extends AppCompatActivity {
             String bodyTemp = Objects.requireNonNull(binding.editBodyTemp.getText()).toString();
             String coughDays = Objects.requireNonNull(binding.editCoughDay.getText()).toString();
             String headacheDays = Objects.requireNonNull(binding.editheadacheDays.getText()).toString();
+            String weeks = Objects.requireNonNull(binding.editWeeks.getText()).toString();
 
             checkItaly = binding.checkBoxItaly.isChecked();
             checkIndonesia = binding.checkBoxIndonesia.isChecked();
@@ -84,16 +85,60 @@ public class RegisterPatient extends AppCompatActivity {
                 return;
             }
 
-            register(name, age, bodyTemp, coughDays, headacheDays);
+            register(name, age, bodyTemp, coughDays, headacheDays, weeks);
+        });
+
+        binding.checkBoxItaly.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.checkBoxIndonesia.setChecked(false);
+                binding.checkBoxPortugal.setChecked(false);
+                binding.checkBoxUSA.setChecked(false);
+                binding.checkBoxChina.setChecked(false);
+                binding.checkboxNot.setChecked(false);
+            }
+        });
+
+        binding.checkBoxIndonesia.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.checkBoxItaly.setChecked(false);
+                binding.checkBoxPortugal.setChecked(false);
+                binding.checkBoxUSA.setChecked(false);
+                binding.checkBoxChina.setChecked(false);
+                binding.checkboxNot.setChecked(false);
+            }
+        });
+
+        binding.checkBoxPortugal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.checkBoxItaly.setChecked(false);
+                binding.checkBoxIndonesia.setChecked(false);
+                binding.checkBoxUSA.setChecked(false);
+                binding.checkBoxChina.setChecked(false);
+                binding.checkboxNot.setChecked(false);
+            }
+        });
+
+        binding.checkBoxUSA.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.checkBoxItaly.setChecked(false);
+                binding.checkBoxIndonesia.setChecked(false);
+                binding.checkBoxPortugal.setChecked(false);
+                binding.checkBoxChina.setChecked(false);
+                binding.checkboxNot.setChecked(false);
+            }
+        });
+
+        binding.checkBoxChina.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.checkBoxItaly.setChecked(false);
+                binding.checkBoxIndonesia.setChecked(false);
+                binding.checkBoxPortugal.setChecked(false);
+                binding.checkBoxUSA.setChecked(false);
+                binding.checkboxNot.setChecked(false);
+            }
         });
 
         binding.checkboxNot.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            binding.checkBoxItaly.setEnabled(!isChecked);
-            binding.checkBoxIndonesia.setEnabled(!isChecked);
-            binding.checkBoxPortugal.setEnabled(!isChecked);
-            binding.checkBoxUSA.setEnabled(!isChecked);
-            binding.checkBoxChina.setEnabled(!isChecked);
-
             if (isChecked) {
                 binding.checkBoxItaly.setChecked(false);
                 binding.checkBoxIndonesia.setChecked(false);
@@ -102,10 +147,22 @@ public class RegisterPatient extends AppCompatActivity {
                 binding.checkBoxChina.setChecked(false);
             }
         });
+
+        binding.checkboxNot.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Desabilitar o campo de texto das semanas e limpar o texto
+                binding.editWeeks.setEnabled(false);
+                binding.editWeeks.setText("");
+            } else {
+                // Habilitar o campo de texto das semanas
+                binding.editWeeks.setEnabled(true);
+            }
+        });
+
     }
 
     private void register(String name, String age, String bodyTemp, String coughDays,
-                          String headacheDays) {
+                          String headacheDays, String weeks) {
         executor.submit(() -> {
             try {
                 PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
@@ -119,21 +176,24 @@ public class RegisterPatient extends AppCompatActivity {
                     return;
                 }
 
-                String calculatedStatus = "Liberado";
+                String calculatedStatus = "";
 
                 if ((checkItaly || checkChina || checkIndonesia || checkPortugal || checkUsa) &&
                         Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(coughDays) > 5 &&
-                        Integer.parseInt(headacheDays) > 5) {
+                        Integer.parseInt(headacheDays) > 5 && Integer.parseInt(weeks) <= 6) {
                     calculatedStatus = "Internado";
                 } else if ((checkItaly || checkChina || checkIndonesia || checkPortugal || checkUsa) &&
-                        (((Integer.parseInt(age) > 60 || Integer.parseInt(age) < 10) &&
+                        ((((Integer.parseInt(age) > 60 || Integer.parseInt(age) < 10) &&
                                 (Float.parseFloat(bodyTemp) > 37 || Integer.parseInt(headacheDays) > 3 ||
                                         Integer.parseInt(coughDays) > 5)) ||
                                 (Integer.parseInt(age) >= 10 && Integer.parseInt(age) <= 60 &&
                                         Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(headacheDays) > 5 &&
-                                        Integer.parseInt(coughDays) > 5))) {
+                                        Integer.parseInt(coughDays) > 5))) && Integer.parseInt(weeks) <= 6) {
                     calculatedStatus = "Quarentena";
+                } else {
+                    calculatedStatus = "Liberado";
                 }
+
 
                 Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays,
                         calculatedStatus);
