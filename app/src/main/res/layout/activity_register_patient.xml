@@ -201,6 +201,14 @@
                 app:layout_constraintTop_toTopOf="@id/checkBoxChina"
                 android:layout_marginEnd="20dp" />
 
+            <TextView
+                android:id="@+id/editStatus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="">
+
+            </TextView>
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabRegister"

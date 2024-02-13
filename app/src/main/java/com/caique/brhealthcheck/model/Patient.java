@@ -34,13 +34,19 @@ public class Patient {
     private String headachePeriodDays;
 
 
+
+    @ColumnInfo(name = "status")
+    private String status;
+
+
     //construtor
-    public Patient(String name, String age, String bodyTemperature, String coughPeriodDays, String headachePeriodDays) {
+    public Patient(String name, String age, String bodyTemperature, String coughPeriodDays, String headachePeriodDays, String status) {
         this.name = name;
         this.age = age;
         this.bodyTemperature = bodyTemperature;
         this.coughPeriodDays = coughPeriodDays;
         this.headachePeriodDays = headachePeriodDays;
+        this.status = status;
     }
 
 
@@ -83,6 +89,14 @@ public class Patient {
 
     public void setHeadachePeriodDays(String headachePeriodDays) {
         this.headachePeriodDays = headachePeriodDays;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 

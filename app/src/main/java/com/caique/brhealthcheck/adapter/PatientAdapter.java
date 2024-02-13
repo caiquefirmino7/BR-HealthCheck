@@ -46,6 +46,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         holder.binding.textViewBodyTemperature.setText("Temperatura Corporal: " + patient.getBodyTemperature());
         holder.binding.textViewCoughDays.setText("Períodos com tosse: " + patient.getCoughPeriodDays());
         holder.binding.textViewHeadacheDays.setText("Períodos com dor de cabeça: " + patient.getHeadachePeriodDays());
+        holder.binding.textViewStatus.setText("Status: " + patient.getStatus());
         holder.binding.btDelete.setImageResource(R.drawable.icon_delete);
 
         holder.binding.btDelete.setOnClickListener(new View.OnClickListener() {

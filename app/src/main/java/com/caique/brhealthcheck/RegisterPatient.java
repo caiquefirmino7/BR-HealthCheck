@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caique.brhealthcheck.dao.PatientDao;
@@ -14,8 +13,6 @@ import com.caique.brhealthcheck.databinding.ActivityRegisterPatientBinding;
 import com.caique.brhealthcheck.db.PatientDatabase;
 import com.caique.brhealthcheck.model.Patient;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,9 +20,15 @@ import java.util.concurrent.Executors;
 public class RegisterPatient extends AppCompatActivity {
 
     private ActivityRegisterPatientBinding binding;
-    PatientDao patientDao;
-    private List<Patient> listPatient = new ArrayList<>();
-    ExecutorService executor = Executors.newFixedThreadPool(1);
+    private PatientDao patientDao;
+    private ExecutorService executor = Executors.newFixedThreadPool(1);
+
+    private Boolean checkItaly;
+    private Boolean checkIndonesia;
+    private Boolean checkPortugal;
+    private Boolean checkUsa;
+    private Boolean checkChina;
+    private Boolean checkAnyone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +48,18 @@ public class RegisterPatient extends AppCompatActivity {
         binding.fabRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String name = binding.editName.getText().toString();
                 String age = binding.editAge.getText().toString();
                 String bodyTemp = binding.editBodyTemp.getText().toString();
                 String coughDays = binding.editCoughDay.getText().toString();
                 String headacheDays = binding.editheadacheDays.getText().toString();
 
-                Boolean checkItaly = binding.checkBoxItaly.isChecked();
-                Boolean checkIndonesia = binding.checkBoxIndonesia.isChecked();
-                Boolean checkPortugal = binding.checkBoxPortugal.isChecked();
-                Boolean checkUsa = binding.checkBoxUSA.isChecked();
-                Boolean checkChina = binding.checkBoxChina.isChecked();
-                Boolean checkAnyone = binding.checkboxNot.isChecked();
+                checkItaly = binding.checkBoxItaly.isChecked();
+                checkIndonesia = binding.checkBoxIndonesia.isChecked();
+                checkPortugal = binding.checkBoxPortugal.isChecked();
+                checkUsa = binding.checkBoxUSA.isChecked();
+                checkChina = binding.checkBoxChina.isChecked();
+                checkAnyone = binding.checkboxNot.isChecked();
 
                 if (name.trim().isEmpty()) {
                     binding.editName.setError("Informe o nome!");
@@ -89,10 +91,7 @@ public class RegisterPatient extends AppCompatActivity {
                     return;
                 }
 
-                finish();
                 register(name, age, bodyTemp, coughDays, headacheDays);
-
-
             }
         });
 
@@ -121,17 +120,12 @@ public class RegisterPatient extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    // Inicializar o PatientDao
                     PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
                     patientDao = patientDatabase.patientDao();
 
-
-
-                    // Verificar se o paciente já existe no banco de dados
                     Patient existingPatient = patientDao.getPatientByName(name);
 
                     if (existingPatient != null) {
-                        // Se o paciente já existe, exibir uma mensagem e retornar
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -141,37 +135,39 @@ public class RegisterPatient extends AppCompatActivity {
                         return;
                     }
 
-                    // Criar uma nova instância de Patient com os dados fornecidos
-                    Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays);
+                    String calculatedStatus = "Liberado";
 
+                    if ((checkItaly || checkChina || checkIndonesia || checkPortugal || checkUsa) &&
+                            Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(coughDays) > 5 && Integer.parseInt(headacheDays) > 5) {
+                        calculatedStatus = "Internado";
+                    }
+                    else if ((checkItaly || checkChina || checkIndonesia || checkPortugal || checkUsa) &&
+                            (((Integer.parseInt(age) > 60 || Integer.parseInt(age) < 10) &&
+                                    (Float.parseFloat(bodyTemp) > 37 || Integer.parseInt(headacheDays) > 3 || Integer.parseInt(coughDays) > 5)) ||
+                                    (Integer.parseInt(age) >= 10 && Integer.parseInt(age) <= 60 &&
+                                            Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(headacheDays) > 5 && Integer.parseInt(coughDays) > 5))) {
+                        calculatedStatus = "Quarentena";
+                    }
 
-                    // Inserir o paciente no banco de dados usando o DAO
+                    Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays, calculatedStatus);
+
                     patientDao.insertPatient(newPatient);
 
-
-                    // Exibir a mensagem de sucesso apenas se o paciente não existir
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(RegisterPatient.this, "Sucesso ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
-
+                            // Iniciar a atividade principal após o cadastro bem-sucedido
+                            Intent intent = new Intent(RegisterPatient.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Finalizar a atividade de cadastro após iniciar a atividade principal
                         }
                     });
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    // Encerrar o ExecutorService após a conclusão das operações
-                    if (executor != null) {
-                        executor.shutdown();
-                    }
                 }
             }
         });
-
-
     }
-
-
-
 }
