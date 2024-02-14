@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
     }
-
+    
+     // Método que executa ações específicas com base na escolha do usuário no menu de opções.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_menu_all) {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Método para obter a lista de pacientes do banco de dados
+    // sem bloquear a Thread principal da interface do usuario
     private void getPatients(FilterType filterType) {
         new Thread(() -> {
             patientDao = PatientDatabase.getInstance(MainActivity.this).patientDao();
@@ -99,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-
+ // método que configura e atualiza o RecyclerView para exibir
+ //   a lista de pacientes conforme ela é alterada dinamicamente.
     @SuppressLint("NotifyDataSetChanged")
     private void setupRecyclerView() {
         patientsList.observe(this, patients -> {
