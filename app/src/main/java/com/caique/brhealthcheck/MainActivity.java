@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(v -> {
             Intent navigateRegisterScreen = new Intent(MainActivity.this, RegisterPatient.class);
             startActivity(navigateRegisterScreen);
-
-            getPatients(FilterType.ALL);// Carrega a lista de pacientes ao criar a atividade
-            setupRecyclerView(); // Configura o RecyclerView
         });
 
         getPatients(FilterType.ALL);
