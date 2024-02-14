@@ -168,7 +168,15 @@ public class RegisterPatient extends AppCompatActivity {
                 PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
                 patientDao = patientDatabase.patientDao();
 
-                Patient existingPatient = patientDao.getPatientByName(name);
+                String nameInput = name.trim();
+                if (nameInput.isEmpty()) {
+                    return;
+                }
+
+                // Normaliza o nome removendo espaços extras antes e depois do nome
+                String normalizedName = nameInput.trim().replaceAll("\\s{2,}", " ");
+
+                Patient existingPatient = patientDao.getPatientByName(normalizedName);
 
                 if (existingPatient != null) {
                     runOnUiThread(() -> Toast.makeText(RegisterPatient.this,
@@ -192,8 +200,7 @@ public class RegisterPatient extends AppCompatActivity {
                     calculatedStatus = "Quarentena";
                 }
 
-
-                Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays,
+                Patient newPatient = new Patient(normalizedName, age, bodyTemp, coughDays, headacheDays,
                         calculatedStatus);
 
                 patientDao.insertPatient(newPatient);
@@ -205,7 +212,6 @@ public class RegisterPatient extends AppCompatActivity {
                     Intent intent = new Intent(RegisterPatient.this, MainActivity.class);
                     startActivity(intent);
                     finish(); // Finaliza a atividade de cadastro após iniciar a atividade principal
-
                 });
 
             } catch (Exception e) {
@@ -213,4 +219,5 @@ public class RegisterPatient extends AppCompatActivity {
             }
         });
     }
+
 }
