@@ -150,11 +150,11 @@ public class RegisterPatient extends AppCompatActivity {
 
         binding.checkboxNot.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Desabilitar o campo de texto das semanas e limpar o texto
+                // Desabilita o campo de texto das semanas e limpar o texto
                 binding.editWeeks.setEnabled(false);
                 binding.editWeeks.setText("");
             } else {
-                // Habilitar o campo de texto das semanas
+                // Habilita o campo de texto das semanas
                 binding.editWeeks.setEnabled(true);
             }
         });
@@ -176,7 +176,7 @@ public class RegisterPatient extends AppCompatActivity {
                     return;
                 }
 
-                String calculatedStatus = "";
+                String calculatedStatus = "Liberado";
 
                 if ((checkItaly || checkChina || checkIndonesia || checkPortugal || checkUsa) &&
                         Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(coughDays) > 5 &&
@@ -190,8 +190,6 @@ public class RegisterPatient extends AppCompatActivity {
                                         Float.parseFloat(bodyTemp) > 37 && Integer.parseInt(headacheDays) > 5 &&
                                         Integer.parseInt(coughDays) > 5))) && Integer.parseInt(weeks) <= 6) {
                     calculatedStatus = "Quarentena";
-                } else {
-                    calculatedStatus = "Liberado";
                 }
 
 
@@ -203,10 +201,10 @@ public class RegisterPatient extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(RegisterPatient.this, "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
-                    // Iniciar a atividade principal após o cadastro bem-sucedido
+                    // Inicia a atividade principal após o cadastro bem-sucedido
                     Intent intent = new Intent(RegisterPatient.this, MainActivity.class);
                     startActivity(intent);
-                    finish(); // Finalizar a atividade de cadastro após iniciar a atividade principal
+                    finish(); // Finaliza a atividade de cadastro após iniciar a atividade principal
 
                 });
 
