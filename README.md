@@ -1,5 +1,20 @@
  # Projeto Health Check
 
+
+## Instalação do Aplicativo
+
+1.Baixe o arquivo APK clicando [aqui]  https://drive.google.com/file/d/1-jqccU54wVMSC0coEq8Xkoqa7mX3FFjW/view?usp=sharing
+
+2. Abra as configurações do seu dispositivo e acesse "Segurança" ou "Privacidade", dependendo do dispositivo.
+
+3. Habilite a opção "Fontes desconhecidas". Isso permitirá a instalação de aplicativos de fontes externas ao Google Play Store.
+
+4. Abra o arquivo APK baixado e siga as instruções na tela para concluir a instalação.
+
+5. Após a instalação bem-sucedida, você pode encontrar o aplicativo na gaveta de aplicativos do seu dispositivo.
+
+ 
+
 # Especificações do Projeto
 🚀 ## Dados Clínicos a Serem Registrados (Prontuário)
 ```
