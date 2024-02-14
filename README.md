@@ -1,17 +1,38 @@
  # Projeto Health Check
 
 # Especificações do Projeto
-🚀Dados Clínicos a Serem Registrados (Prontuário)
+🚀 ## Dados Clínicos a Serem Registrados (Prontuário)
+```
 Nome
+```
+```
 Temperatura Corporal
+```
+```
 Período (em dias) com Tosse
+```
+```
 Período (em dias) com Dor de Cabeça
+```
+```
 Se Visitou e Há Quantas Semanas os Seguintes Países:
+```
+```
 Itália
+```
+```
 China
+```
+```
 Indonésia
+```
+```
 Portugal
+```
+```
 Estados Unidos
+
+```
 ### Regras de Negócio
 ```
  O paciente deve ser internado para tratamento se:
