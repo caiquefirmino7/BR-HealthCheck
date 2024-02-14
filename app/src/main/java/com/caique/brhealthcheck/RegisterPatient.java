@@ -160,7 +160,8 @@ public class RegisterPatient extends AppCompatActivity {
         });
 
     }
-
+//    Método register para realizar o registro do paciente no banco de dados.
+//    É usado um ExecutorService para executar a operação de registro em uma thread separada, evitando bloqueios na UI.
     private void register(String name, String age, String bodyTemp, String coughDays,
                           String headacheDays, String weeks) {
         executor.submit(() -> {
@@ -201,7 +202,7 @@ public class RegisterPatient extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(RegisterPatient.this, "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
-                    // Inicia a atividade principal após o cadastro bem-sucedido
+                    // Inicia a atividade principal após o cadastro
                     Intent intent = new Intent(RegisterPatient.this, MainActivity.class);
                     startActivity(intent);
                     finish(); // Finaliza a atividade de cadastro após iniciar a atividade principal
