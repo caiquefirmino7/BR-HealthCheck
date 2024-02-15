@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() { // um dos métodos do ciclo de vida de uma Activity no Android.
-        super.onResume(); // chamada para o método onResume() da superclasse da sua Activity.
+        super.onResume(); // chamada para o método onResume() da superclasse da Activity.
         getPatients(FilterType.ALL); // Atualiza a lista de pacientes ao retomar a atividade
     }
 
