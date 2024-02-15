@@ -35,17 +35,18 @@ public class MainActivity extends AppCompatActivity {
             Intent navigateRegisterScreen = new Intent(MainActivity.this, RegisterPatient.class);
             startActivity(navigateRegisterScreen);
 
-            getPatients(FilterType.ALL);// Carrega a lista de pacientes ao criar a atividade
-            setupRecyclerView(); // Configura o RecyclerView
         });
 
         getPatients(FilterType.ALL);
-        setupRecyclerView();
+        //  Chama o método getPatients() para carregar a lista de pacientes com o tipo de filtro ALL,
+        // que retorna todos os pacientes do banco de dados.
+
+        setupRecyclerView();  // Configura o RecyclerView para exibir a lista de pacientes.
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onResume() { // um dos métodos do ciclo de vida de uma Activity no Android.
+        super.onResume(); // chamada para o método onResume() da superclasse da sua Activity.
         getPatients(FilterType.ALL); // Atualiza a lista de pacientes ao retomar a atividade
     }
 
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
     }
-
     @Override
+// método que executa ações específicas com base na escolha do usuário no menu de opções.
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_menu_all) {
             getPatients(FilterType.ALL);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Método para obter a lista de pacientes do banco de dados
+    // sem bloquear a Thread principal da interface do usuario
     private void getPatients(FilterType filterType) {
         new Thread(() -> {
             patientDao = PatientDatabase.getInstance(MainActivity.this).patientDao();
@@ -103,9 +105,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+//    o método setupRecyclerView() é responsável por configurar e atualizar o RecyclerView para exibir
+//    a lista de pacientes conforme ela é alterada dinamicamente.
     @SuppressLint("NotifyDataSetChanged")
     private void setupRecyclerView() {
         patientsList.observe(this, patients -> {
+//
             binding.rvMain.setLayoutManager(new LinearLayoutManager(MainActivity.this));
             binding.rvMain.setHasFixedSize(true);
             patientAdapter = new PatientAdapter(MainActivity.this, patients);
