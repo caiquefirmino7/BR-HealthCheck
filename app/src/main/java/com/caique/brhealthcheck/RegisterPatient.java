@@ -80,7 +80,7 @@ public class RegisterPatient extends AppCompatActivity {
                 return;
             }
 
-             if (weeks.isEmpty() && (checkItaly || checkIndonesia || checkPortugal || checkUsa || checkChina)) {
+            if (weeks.isEmpty() && (checkItaly || checkIndonesia || checkPortugal || checkUsa || checkChina)) {
                 Toast.makeText(getApplicationContext(), "Por favor, informe as semanas de visita !", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -153,7 +153,7 @@ public class RegisterPatient extends AppCompatActivity {
             }
         });
 
-         binding.checkboxNot.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.checkboxNot.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Desabilita o campo de texto das semanas e limpar o texto
                 binding.editWeeks.setEnabled(false);
@@ -169,7 +169,9 @@ public class RegisterPatient extends AppCompatActivity {
                 binding.editWeeks.setEnabled(true);
             }
         });
+
     }
+
 //    Método register para realizar o registro do paciente no banco de dados.
 //    É usado um ExecutorService para executar a operação de registro em uma thread separada, evitando bloqueios na UI.
     private void register(String name, String age, String bodyTemp, String coughDays,
@@ -179,7 +181,15 @@ public class RegisterPatient extends AppCompatActivity {
                 PatientDatabase patientDatabase = PatientDatabase.getInstance(getApplicationContext());
                 patientDao = patientDatabase.patientDao();
 
-                Patient existingPatient = patientDao.getPatientByName(name);
+                String nameInput = name.trim();
+                if (nameInput.isEmpty()) {
+                    return;
+                }
+
+                // Normaliza o nome removendo espaços extras antes e depois do nome
+                String normalizedName = nameInput.trim().replaceAll("\\s{2,}", " ");
+
+                Patient existingPatient = patientDao.getPatientByName(normalizedName);
 
                 if (existingPatient != null) {
                     runOnUiThread(() -> Toast.makeText(RegisterPatient.this,
@@ -203,8 +213,7 @@ public class RegisterPatient extends AppCompatActivity {
                     calculatedStatus = "Quarentena";
                 }
 
-
-                Patient newPatient = new Patient(name, age, bodyTemp, coughDays, headacheDays,
+                Patient newPatient = new Patient(normalizedName, age, bodyTemp, coughDays, headacheDays,
                         calculatedStatus);
 
                 patientDao.insertPatient(newPatient);
@@ -212,11 +221,10 @@ public class RegisterPatient extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(RegisterPatient.this, "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
-                    // Inicia a atividade principal após o cadastro
+                    // Inicia a atividade principal após o cadastro bem-sucedido
                     Intent intent = new Intent(RegisterPatient.this, MainActivity.class);
                     startActivity(intent);
                     finish(); // Finaliza a atividade de cadastro após iniciar a atividade principal
-
                 });
 
             } catch (Exception e) {
@@ -224,4 +232,5 @@ public class RegisterPatient extends AppCompatActivity {
             }
         });
     }
+
 }
