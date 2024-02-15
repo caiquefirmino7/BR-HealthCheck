@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     // Método para obter a lista de pacientes do banco de dados
     // sem bloquear a Thread principal da interface do usuario
     private void getPatients(FilterType filterType) {
