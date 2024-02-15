@@ -3,7 +3,7 @@
 
 ## Instalação do Aplicativo
 
-1.Baixe o arquivo APK clicando aqui: https://drive.google.com/file/d/1HKukfrfqOpJk_TY5SMHiJ4oZLAx7ZWQf/view?usp=sharing
+1.Baixe o arquivo APK clicando aqui: https://drive.google.com/file/d/1Cc8bHxdLQ1iiHCfbg5fl8DIGyJ_666RR/view?usp=sharing
 
 2. Abra as configurações do seu dispositivo e acesse "Segurança" ou "Privacidade", dependendo do dispositivo.
 
