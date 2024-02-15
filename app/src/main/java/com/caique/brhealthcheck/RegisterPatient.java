@@ -233,4 +233,8 @@ public class RegisterPatient extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4b6195605c1ea58b1de42bafefdf41aad9575789
