@@ -81,12 +81,17 @@ public class RegisterPatient extends AppCompatActivity {
             }
 
             if (weeks.isEmpty() && (checkItaly || checkIndonesia || checkPortugal || checkUsa || checkChina)) {
-                Toast.makeText(getApplicationContext(), "Por favor, informe as semanas de visita !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Por favor, informe o número de semanas!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!checkItaly && !checkIndonesia && !checkPortugal && !checkUsa && !checkChina && !checkAnyone) {
                 Toast.makeText(getApplicationContext(), "Selecione um CheckBox!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!weeks.isEmpty() && Integer.parseInt(weeks) == 0) {
+                Toast.makeText(getApplicationContext(), "O número de semanas deve ser maior que zero!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -172,7 +177,7 @@ public class RegisterPatient extends AppCompatActivity {
 
     }
 
-//    Método register para realizar o registro do paciente no banco de dados.
+    //    Método register para realizar o registro do paciente no banco de dados.
 //    É usado um ExecutorService para executar a operação de registro em uma thread separada, evitando bloqueios na UI.
     private void register(String name, String age, String bodyTemp, String coughDays,
                           String headacheDays, String weeks) {
@@ -232,9 +237,4 @@ public class RegisterPatient extends AppCompatActivity {
             }
         });
     }
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4b6195605c1ea58b1de42bafefdf41aad9575789

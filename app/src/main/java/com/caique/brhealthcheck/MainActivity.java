@@ -34,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(v -> {
             Intent navigateRegisterScreen = new Intent(MainActivity.this, RegisterPatient.class);
             startActivity(navigateRegisterScreen);
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b6195605c1ea58b1de42bafefdf41aad9575789
         });
 
         getPatients(FilterType.ALL);
@@ -58,11 +54,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
     }
-<<<<<<< HEAD
-=======
-    
+
      // Método que executa ações específicas com base na escolha do usuário no menu de opções.
->>>>>>> 4b6195605c1ea58b1de42bafefdf41aad9575789
     @Override
 // método que executa ações específicas com base na escolha do usuário no menu de opções.
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -112,14 +105,10 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-<<<<<<< HEAD
-
 //    o método setupRecyclerView() é responsável por configurar e atualizar o RecyclerView para exibir
 //    a lista de pacientes conforme ela é alterada dinamicamente.
-=======
  // método que configura e atualiza o RecyclerView para exibir
  //   a lista de pacientes conforme ela é alterada dinamicamente.
->>>>>>> 4b6195605c1ea58b1de42bafefdf41aad9575789
     @SuppressLint("NotifyDataSetChanged")
     private void setupRecyclerView() {
         patientsList.observe(this, patients -> {
